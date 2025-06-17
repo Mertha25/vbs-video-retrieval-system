@@ -192,3 +192,24 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# VBS Project - Smart exclusion
+# Exclude large video files
+Dataset/V3C1-200/*/*.mp4
+Dataset/V3C1-200/*/*.avi
+Dataset/V3C1-200/*/*.mov
+
+# Exclude most keyframes but keep samples
+Dataset/V3C1-200/*/extracted_frames/
+# Keep only 3 sample keyframes per video for demo
+!Dataset/V3C1-200/*/extracted_frames/frame_000000030000.jpeg
+!Dataset/V3C1-200/*/extracted_frames/frame_000000060000.jpeg
+!Dataset/V3C1-200/*/extracted_frames/frame_000000090000.jpeg
+
+# Keep all analysis results 
+!Dataset/V3C1-200/*/video_analysis_report.json
+
+# General exclusions
+logs/
+*.log
+storage/temp/

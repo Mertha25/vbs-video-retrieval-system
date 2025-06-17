@@ -1,0 +1,87 @@
+# ===== BACKEND DEPENDENCIES (from project_tools.txt) =====
+# Core libraries
+numpy==1.26.4
+Pillow==10.3.0
+opencv-python
+
+# AI/ML Libraries - Designed for GPU usage
+torch==2.3.0
+torchvision==0.18.0
+# Install CLIP directly from OpenAI's source code
+clip @ git+https://github.com/openai/CLIP.git@a1d071733d7111c9c014f024669f959182114e33
+# For YOLOv7-OID (using Ultralytics)
+ultralytics==8.2.22
+# For Text Extraction - EasyOCR
+easyocr==1.7.1
+
+# Web Framework (Search API) - FROM project_tools.txt
+Flask==3.0.3
+Flask-Cors==4.0.1
+Werkzeug==3.0.3
+Jinja2==3.1.4
+itsdangerous==2.2.0
+click==8.1.7
+
+# Other dependencies from project_tools.txt
+blinker==1.8.2
+certifi==2024.2.2
+charset-normalizer==3.3.2
+contourpy==1.2.1
+cycler==0.12.1
+filelock==3.14.0
+fonttools==4.52.1
+fsspec==2024.5.0
+ftfy==6.2.0
+idna==3.7
+imageio==2.34.1
+joblib==1.4.2
+kiwisolver==1.4.5
+lazy_loader==0.4
+matplotlib==3.9.0
+mpmath==1.3.0
+networkx==3.3
+ninja==1.11.1.1
+packaging==24.0
+pandas==2.2.2
+psutil==5.9.8
+py-cpuinfo==9.0.0
+pyclipper==1.3.0.post5
+pyparsing==3.1.2
+python-bidi==0.4.2
+python-dateutil==2.9.0.post0
+pytz==2024.1
+PyYAML==6.0.1
+regex==2024.5.15
+requests==2.32.2
+scikit-image==0.23.2
+scikit-learn==1.5.0
+scipy==1.13.1
+seaborn==0.13.2
+shapely==2.0.4
+six==1.16.0
+sympy==1.12
+thop==0.1.1.post2209072238
+threadpoolctl==3.5.0
+tifffile==2024.5.22
+tqdm==4.66.4
+typing_extensions==4.12.0
+tzdata==2024.1
+urllib3==2.2.1
+wcwidth==0.2.13
+
+# ===== QUERY SERVER & DATABASE ADDITIONS =====
+# Database connector - UPGRADED from project_tools.txt
+psycopg2-binary==2.9.9
+
+# Vector database support
+pgvector==0.2.4
+
+# Configuration management
+python-dotenv==1.0.0
+
+# Enhanced logging
+loguru==0.7.0
+
+# Development tools
+pytest==7.4.2
+pytest-flask==1.2.0
