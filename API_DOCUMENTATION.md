@@ -150,7 +150,7 @@ This API provides multiple endpoints to search for video moments stored in a Pos
 
 ## 🔄 Response Format
 
-All endpoints return:
+All endpoints return this format of result(this is an example using the filter "multimodal"):
 
 ```json
 {

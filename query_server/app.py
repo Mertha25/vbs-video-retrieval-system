@@ -122,11 +122,14 @@ def search_by_text():
             SELECT m.*, v.original_filename
             FROM video_moments m
             JOIN videos v ON m.video_id = v.video_id
-            WHERE m.extracted_search_words ILIKE %s OR v.original_filename ILIKE %s
+            WHERE m.extracted_search_words ILIKE %s
+               OR m.detected_object_names ILIKE %s
+               OR v.original_filename ILIKE %s
             ORDER BY m.timestamp_seconds
             LIMIT %s
         """
-        cursor.execute(sql, [f'%{query}%', f'%{query}%', limit])
+        # Ajout du paramètre pour detected_object_names
+        cursor.execute(sql, [f'%{query}%', f'%{query}%', f'%{query}%', limit])
         results = cursor.fetchall()
 
         formatted = []
@@ -217,9 +220,13 @@ def multimodal_search():
     text = data.get('text')
     color = data.get('color')
     embedding = data.get('embedding')
-    threshold = data.get('threshold', 50)
+    threshold = data.get('threshold', 50)  # For color distance
     sim_threshold = data.get('similarity_threshold', 0.7)
     limit = data.get('limit', 50)
+
+    # Optional: weights for scoring
+    weight_sim = 0.6
+    weight_color = 0.4
 
     conn = get_db_connection()
     try:
@@ -234,10 +241,16 @@ def multimodal_search():
 
         for row in rows:
             ok = True
+            score_components = {}
+            total_score = 0
+
+            # Parse fields once
+            extracted_words = parse_json_field(row.get('extracted_search_words')) or []
+            detected_objects = parse_json_field(row.get('detected_object_names')) or []
+            all_texts = extracted_words + detected_objects
 
             if text:
-                extracted = parse_json_field(row.get('extracted_search_words'))
-                if not any(text.lower() in word.lower() for word in extracted):
+                if not any(text.lower() in str(t).lower() for t in all_texts):
                     ok = False
 
             if color and ok:
@@ -248,6 +261,7 @@ def multimodal_search():
                         ok = False
                     else:
                         row['color_distance'] = round(dist, 2)
+                        score_components['color_distance'] = dist
                 else:
                     ok = False
 
@@ -259,18 +273,27 @@ def multimodal_search():
                         ok = False
                     else:
                         row['similarity_score'] = round(sim, 4)
+                        score_components['similarity_score'] = sim
                 else:
                     ok = False
 
             if ok:
-                row['detected_object_names'] = parse_json_field(row.get('detected_object_names'))
-                row['extracted_search_words'] = parse_json_field(row.get('extracted_search_words'))
+                # Compute a combined score (only if both are available)
+                sim_score = score_components.get('similarity_score', 0)
+                color_dist = score_components.get('color_distance', 255)
+                normalized_color_score = 1 - min(color_dist / 255, 1)  # Normalize to [0-1]
+
+                total_score = weight_sim * sim_score + weight_color * normalized_color_score
+                row['total_score'] = round(total_score, 4)
+
+                row['detected_object_names'] = detected_objects
+                row['extracted_search_words'] = extracted_words
                 row.pop('clip_embedding', None)
+
                 results.append(row)
 
-        results = sorted(results, key=lambda r: (
-            -r.get('similarity_score', 0), r.get('color_distance', float('inf'))
-        ))[:limit]
+        # Sort by total_score descending
+        results = sorted(results, key=lambda r: -r.get('total_score', 0))[:limit]
 
         return jsonify({'results': results, 'count': len(results)})
     except Exception as e:
