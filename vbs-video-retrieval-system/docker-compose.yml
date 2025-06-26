@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+  postgres:
+    image: pgvector/pgvector:pg15
+    container_name: video_retrieval_postgres
+    environment:
+      POSTGRES_DB: videodb_creative_v2
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5432:5432" # later change to 80:80 for production otherwise the current  is only for development Use "80:80" for production (Nginx). For dev, use "5173:5173" and run Vite dev server.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d videodb_creative_v2"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  backend:
+    build: 
+      context: .
+      dockerfile: query_server/Dockerfile
+    container_name: video_retrieval_backend
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=admin123
+      - DB_NAME=videodb_creative_v2
+      - VIDEO_DATASET_PATH=/app/dataset
+      # VBS Competition Integration
+      - DRES_BASE_URL=http://vbs.videobrowsing.org:8080
+      - DRES_USERNAME=TECHtalent13
+      - DRES_PASSWORD=QbaA6G4P
+      - ENABLE_VBS=true
+    volumes:
+      - ./Dataset:/app/dataset:ro
+    depends_on:
+      - postgres
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build: ../frontend
+    container_name: video_retrieval_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
