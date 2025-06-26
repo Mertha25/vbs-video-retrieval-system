@@ -1,0 +1,265 @@
+/* ────────── Card container ────────── */
+.card {
+  background: var(--card-bg, #fff);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.17s;
+}
+.card:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* ────────── Thumbnail display ────────── */
+.thumbnail {
+  width: 100%;
+  border-radius: 8px;
+  background-color: #000;
+  object-fit: cover;
+  max-height: 180px;
+}
+.videoPreview {
+  width: 100%;
+  border-radius: 8px;
+  background: #000;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Title */
+.title {
+  font-weight: 600;
+  font-size: 0.8rem;
+  margin-top: 0.6rem;
+  text-align: center;
+  color: var(--text-color, #111827);
+}
+
+/* Meta paragraphs */
+.meta {
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  color: var(--text-muted, #4b5563);
+  word-break: break-word;
+}
+
+/* Dominant colours */
+.colorRow {
+  margin-top: 0.3rem;
+  display: flex;
+  gap: 0.25rem;
+}
+.colorDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #888;
+}
+
+/* Card-level buttons */
+.actionsRow {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+.small {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: var(--btn-bg, #f9fafb);
+  color: var(--btn-text, #111827);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.small:hover {
+  background: var(--btn-hover, #f3f4f6);
+}
+
+/* ────────── Full-screen overlay & modal ────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.modal {
+  position: relative;
+  background: var(--modal-bg, #fff);
+  color: var(--text-color, #111827);
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 800px;
+  width: 90%;
+  box-shadow: 0 0 12px #0008;
+}
+
+/* Close (×) button */
+.close {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: #000;
+  background: #ffffffcc;
+  border: 1px solid #777;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.close:hover {
+  background: #f2f2f2;
+}
+
+/* Submit overlay form */
+.tsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.8rem 0;
+}
+.tsRow input {
+  width: 120px;
+  padding: 0.3rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.submitBtn {
+  width: 100%;
+  padding: 0.5rem;
+  background: #4287f5;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.submitBtn:hover {
+  background: #2f6fe1;
+}
+
+/* ────────── Skeleton Loader ────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #e2e8f0 25%,
+    #f8fafc 50%,
+    #e2e8f0 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.3s infinite;
+  border-radius: 8px;
+}
+.skeleton.thumbnail {
+  width: 100%;
+  height: 160px;
+}
+.skeleton.text {
+  width: 70%;
+  height: 14px;
+  margin-top: 0.5rem;
+}
+.skeleton.meta {
+  width: 60%;
+  height: 12px;
+  margin-top: 0.3rem;
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ────────── Dark Mode Variables ────────── */
+:root.dark {
+  --card-bg: #1e293b;
+  --modal-bg: #0f172a;
+  --text-color: #f1f5f9;
+  --text-muted: #94a3b8;
+  --btn-bg: #334155;
+  --btn-hover: #475569;
+  --btn-text: #e2e8f0;
+}
+
+.dresInfo {
+  background-color: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+.dresInfo p {
+  margin: 2px 0;
+  color: #1e40af;
+}
+
+.dresInfo strong {
+  font-weight: 600;
+}
+
+.submissionResult {
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 8px 0;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.submissionResult.success {
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #065f46;
+}
+
+.submissionResult.error {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #991b1b;
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Dark mode support for DRES elements */
+@media (prefers-color-scheme: dark) {
+  .dresInfo {
+    background-color: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4);
+  }
+  
+  .dresInfo p {
+    color: #93c5fd;
+  }
+  
+  .submissionResult.success {
+    background-color: rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.4);
+    color: #6ee7b7;
+  }
+  
+  .submissionResult.error {
+    background-color: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #fca5a5;
+  }
+}

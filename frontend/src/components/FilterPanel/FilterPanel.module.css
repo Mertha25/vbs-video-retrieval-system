@@ -1,0 +1,335 @@
+/* ---------------------------------------------------------
+   FilterPanel – base container
+   ---------------------------------------------------------*/
+.panelRoot {
+  max-width: 400px;
+  padding: 2rem 1.5rem;
+  background: #fff;
+  border-radius: 1.3rem;
+  box-shadow: 0 8px 24px #0ea5e91a;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  font-size: 0.75rem;
+}
+
+/* ---------------------------------------------------------
+   Generic text inputs (textarea & small text fields)
+   ---------------------------------------------------------*/
+.textInput {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1.5px solid #e5e7eb;
+  padding: 0.75em 1em;
+  border-radius: 0.6em;
+  background: #f8fafc;
+  font-size: 1rem;
+  margin-top: 0.5em;
+  color: #18181b;
+  transition: border 0.18s;
+  min-height: 2.5em;
+  max-width: 100%;
+  resize: vertical;
+}
+.textInput:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  background: #fff;
+}
+.textInput::placeholder {
+  font-size: 0.7rem;
+  color: #b0b0b0;
+}
+
+/* ---------------------------------------------------------
+   Row wrapper for each filter block
+   ---------------------------------------------------------*/
+.filterRow {
+  margin-bottom: 1.5rem;
+}
+
+input[type="checkbox"] {
+  accent-color: #0ea5e9;     
+}
+
+/* ---------------------------------------------------------
+   Color picker
+   ---------------------------------------------------------*/
+.colorInput {
+  height: 1.3rem;
+  width: 2.1rem;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px #e2e8f0;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+/* ---------------------------------------------------------
+   File upload & drag‑and‑drop
+   ---------------------------------------------------------*/
+.fileRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.fileInput {
+  display: none;
+}
+.fileLabel {
+  background: #0ea5e9;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.45rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.fileLabel:hover {
+  background: #0369a1;
+}
+.fileName {
+  font-size: 0.92rem;
+  color: #1e293b;
+  margin-left: 6px;
+}
+.dragZone {
+  margin-top: 0.7rem;
+  background: #f3f4f6;
+  border: 2px dashed #94a3b8;
+  border-radius: 9px;
+  padding: 1.1rem;
+  text-align: center;
+  font-size: 1rem;
+  color: #64748b;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+}
+.dragZoneActive {
+  border-color: #0ea5e9;
+  background: #e0f2fe;
+  color: #0ea5e9;
+}
+
+/* ---------------------------------------------------------
+   Object Query – pill list
+   ---------------------------------------------------------*/
+.objectBox {
+  border: 1.5px solid #e5e7eb;
+  background: #f8fafc;
+  border-radius: 0.6rem;
+  padding: 0.55rem 0.6rem;
+  margin-top: 0.6rem;
+}
+.objectTags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+.tagRemove {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #0369a1;
+  margin-left: 0.35rem;
+  cursor: pointer;
+  padding: 0;
+}
+.tagRemove:hover {
+  color: #0ea5e9;
+}
+.objectInput {
+  flex: 1 0 120px;
+  min-width: 80px;
+  border: none;
+  background: transparent;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.78rem;
+  color: #18181b;
+}
+.objectInput:focus {
+  outline: none;
+}
+
+/* ---------------------------------------------------------
+   Interval Query – date range picker
+   ---------------------------------------------------------*/
+.intervalRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+.dateInput {
+  border: 1.5px solid #e5e7eb;
+  background: #f8fafc;
+  border-radius: 0.6rem;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.85rem;
+  color: #18181b;
+}
+.dateInput:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  background: #fff;
+}
+
+/* ---------------------------------------------------------
+   Action buttons
+   ---------------------------------------------------------*/
+.filterActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.btnSearch,
+.btnReset {
+  display: flex;
+  align-items: center;
+  padding: 0.6em 1.2em;
+  font-weight: 600;
+  border-radius: 0.6em;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background 0.18s, color 0.18s;
+}
+.btnSearch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  height: 44px;
+  padding: 0.6em 1.5em;
+  font-weight: 600;
+  border-radius: 0.6em;
+  background: #0ea5e9;
+  color: #fff;
+  border: 1px solid #0ea5e9;
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+}
+.btnSearch:hover {
+  background: #0369a1;
+  border-color: #0369a1;
+}
+.btnReset {
+  background: #fff;
+  color: #0369a1;
+  border: 1.5px solid #0ea5e9;
+}
+.btnReset:hover {
+  background: #e0f2fe;
+  color: #0ea5e9;
+}
+
+/* ---------------------------------------------------------
+   Responsive (mobile)
+   ---------------------------------------------------------*/
+@media (max-width: 700px) {
+  .filterActions {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .btnSearch,
+  .btnReset {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Label "Enable Time Interval" */
+.intervalToggleTxt {
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+/* Container for the 3 time fields */
+.timeGroup {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Input + unit badge (h/m/s) */
+.timeField {
+  position: relative;
+}
+
+/* The numeric input */
+.timeField input {
+  width: 3.4rem;
+  padding: 0.45rem 0.35rem;
+  text-align: center;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-size: 0.9rem;
+  transition: border-color 0.18s;
+}
+.timeField input:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  background: #ffffff;
+}
+
+/* Small unit label h / m / s */
+.unit {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: #64748b;
+  pointer-events: none;
+}
+
+/* Colon separators */
+.sep {
+  font-weight: 600;
+  margin: 0 2px;
+  user-select: none;
+}
+
+/* Responsive: reduce width on mobile */
+@media (max-width: 500px) {
+  .timeField input {
+    width: 2.8rem;
+  }
+}
+
+/* ---------------------------------------------------------
+   Manual Search Button (outside FilterPanel)
+   ---------------------------------------------------------*/
+.btnSearchManual {
+  background-color: #0ea5e9;
+  color: #ffffff;
+  padding: 0.65rem 1.2rem;
+  border: none;
+  border-radius: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btnSearchManual:hover {
+  background-color: #0284c7;
+}
+/* ---------------------------------------------------------
+   Reset Button (outside FilterPanel)
+   ---------------------------------------------------------*/

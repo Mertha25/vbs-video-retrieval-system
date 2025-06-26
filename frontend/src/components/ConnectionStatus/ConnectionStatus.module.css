@@ -1,0 +1,43 @@
+.statusRoot {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.statusItem {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 1rem;
+}
+
+/* Base dot style: filled circle */
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: currentColor;
+}
+
+/* Dot color variations */
+.dotGray {
+  color: #9ca3af;
+  animation: pulse 1s infinite alternate;
+}
+.dotRed {
+  color: #ef4444;
+}
+.dotGreen {
+  color: #22c55e;
+}
+
+/* Optional pulsing animation */
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}

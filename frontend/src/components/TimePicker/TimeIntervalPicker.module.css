@@ -1,0 +1,60 @@
+/* libellé “Enable Time Interval” */
+.intervalToggleTxt {
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+/* conteneur des 3 champs */
+.timeGroup {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* bloc input + badge (h/m/s) */
+.timeField {
+  position: relative;
+}
+
+/* l’input numérique */
+.timeField input {
+  width: 3.4rem;               /* tient sur 2 chiffres + padding */
+  padding: 0.45rem 0.35rem;
+  text-align: center;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-size: 0.9rem;
+  transition: border-color 0.18s;
+}
+.timeField input:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  background: #ffffff;
+}
+
+/* petite étiquette h / m / s */
+.unit {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: #64748b;
+  pointer-events: none;
+}
+
+/* deux-points séparateurs */
+.sep {
+  font-weight: 600;
+  margin: 0 2px;
+  user-select: none;
+}
+
+/* responsive : rétrécit sur mobile */
+@media (max-width: 500px) {
+  .timeField input {
+    width: 2.8rem;
+  }
+}
